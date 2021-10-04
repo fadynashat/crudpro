@@ -1,0 +1,56 @@
+﻿<h1 *ngIf="isAddMode">Add product</h1>
+<h1 *ngIf="!isAddMode">Edit product</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+
+     
+        <div class="form-group col-5">
+            <label> proname</label>
+            <input type="text" formControlName="proname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required"> Name is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+
+     
+        <div class="form-group col-5">
+            <label> description</label>
+            <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required"> description is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label>amount</label>
+            <input type="text" formControlName="amount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }" />
+            <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+                <div *ngIf="f.amount.errors.required">amount is required</div>
+                <div *ngIf="f.amount.errors.amount">amount must be a valid amount </div>
+            </div>
+        </div>
+        <div class="form-group col-md-5">
+            <label>productType</label>
+            <select formControlName="productType" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.productType.errors }">
+                <option value=""></option>
+                <option value="Basic">Basic</option>
+                <option value="Premium">Premium</option>
+            </select>
+            <div *ngIf="submitted && f.productType.errors" class="invalid-feedback">
+                <div *ngIf="f.productType.errors.required">productType is required</div>
+            </div>
+        </div>
+    </div>
+  
+
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/products" class="btn btn-link">Cancel</a>
+    </div>
+</form>
