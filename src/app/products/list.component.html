@@ -1,7 +1,10 @@
 ﻿<h1>Products</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add product</a>
-<table class="table table-striped" >
-    <thead>
+
+<p-table *ngIf="Products" [value]="Products"   [paginator]="true" 
+            [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
+    <ng-template pTemplate="header">
         <tr>
             <th style="width: 10%">id</th>
             <th style="width: 10%">Name</th>
@@ -10,9 +13,9 @@
             <th style="width: 10%">productType</th>
             <th style="width: 10%"></th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of Products" >
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
             <td>{{product.id}}  </td>
 
             <td>{{product.proname}} </td>
@@ -32,5 +35,6 @@
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>
+<p-toast></p-toast>
