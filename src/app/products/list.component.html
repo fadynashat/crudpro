@@ -1,6 +1,6 @@
 ﻿<h1>Products</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add product</a>
-
+<hr />
 <p-table *ngIf="Products" [value]="Products"   [paginator]="true" 
             [rows]="10" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
@@ -24,10 +24,10 @@
             <td>{{product.productType}}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{product.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteproduct(product.id)" class="btn btn-sm btn-danger btn-delete-product" [disabled]="product.isDeleting">
+                <p-button (click)="deleteproduct(product.id)" styleClass="p-button-danger" [disabled]="product.isDeleting">
                     <span *ngIf="product.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!product.isDeleting">Delete</span>
-                </button>
+                </p-button>
             </td>
         </tr>
         <tr *ngIf="!Products">
@@ -38,3 +38,4 @@
     </ng-template>
 </p-table>
 <p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
